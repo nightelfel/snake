@@ -14,7 +14,7 @@ public class Block {
 		length=30;
 		g2d=d;
 		x=a*length;
-		y=b*length;
+		y=b*length+50;
 	}
 	public void gotoAndStop(int a)
 	{

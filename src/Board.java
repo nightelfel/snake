@@ -26,6 +26,7 @@ public class Board extends JPanel implements Runnable{
 	private BufferedImage img;
 	private LinkedList<Point> list;
 	public String direction;
+	public String oldDirection;
 	public boolean gameOver;
 	public boolean hasfood;
 	private Random rand;
@@ -35,7 +36,7 @@ public class Board extends JPanel implements Runnable{
 	{
 		rand=new Random();
 		list=new LinkedList<Point>();
-		img=new BufferedImage(700,450,BufferedImage.TYPE_INT_ARGB);
+		img=new BufferedImage(600,500,BufferedImage.TYPE_INT_ARGB);
 		g2d=(Graphics2D) img.getGraphics();
 		block=new Block[20][15];
 		g2d.setBackground(new Color(0,0,0));
@@ -63,13 +64,14 @@ public class Board extends JPanel implements Runnable{
 		hasfood=false;
 		gameOver=false;
 		direction="right";
+		oldDirection="right";
 		list.removeAll(list);
 		g2d.setColor(new Color(0,0,0));
 		g2d.setFont(new Font("Courier New",1,20));
-		g2d.fillRect(600, 0, 100, 450);
+		g2d.fillRect(0, 0, 600, 50);
 		g2d.setColor(new Color(0,180,0));
-		g2d.drawString("score",620,200);
-		g2d.drawString(Integer.toString(score), 620, 250);
+		g2d.drawString("score",20,30);
+		g2d.drawString(Integer.toString(score), 100, 30);
 		for (int i=0;i<20;i++)
 		{
 			for (int j=0;j<15;j++)
@@ -147,10 +149,10 @@ public class Board extends JPanel implements Runnable{
 			score+=10;
 			g2d.setColor(new Color(0,0,0));
 			g2d.setFont(new Font("Courier New",1,20));
-			g2d.fillRect(600, 0, 100, 450);
+			g2d.fillRect(0, 0, 600, 50);
 			g2d.setColor(new Color(0,180,0));
-			g2d.drawString("score",620,200);
-			g2d.drawString(Integer.toString(score), 620, 250);
+			g2d.drawString("score",20,30);
+			g2d.drawString(Integer.toString(score), 100, 30);
 		} else
 		{
 			c=list.poll();
@@ -158,6 +160,7 @@ public class Board extends JPanel implements Runnable{
 		}
 		block[t.x][t.y].gotoAndStop(2);
 		repaint();
+		oldDirection=new String(direction);
 	}
 	public void run()
 	{
@@ -177,7 +180,7 @@ public class Board extends JPanel implements Runnable{
 			}
 		}
 		g2d.setColor(new Color(40,40,40,180));
-		g2d.fillRect(0, 0, 600, 450);
+		g2d.fillRect(0, 0, 600, 500);
 		g2d.setColor(new Color(0,180,0));
 		g2d.drawString("your score is "+score, 100, 200);
 		g2d.drawString("press space to play again", 100, 250);
@@ -185,6 +188,6 @@ public class Board extends JPanel implements Runnable{
 	}
 	public void paintComponent(Graphics g)
 	{
-		g.drawImage(img, 0, 0, 700,450,this);
+		g.drawImage(img, 0, 0, 600,500,this);
 	}
 }

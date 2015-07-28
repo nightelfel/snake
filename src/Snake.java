@@ -19,11 +19,11 @@ public class Snake {
 	{
 		state="welcome";
 		window=new JFrame("Snake");
-		window.getContentPane().setPreferredSize(new Dimension(700,450));
+		window.getContentPane().setPreferredSize(new Dimension(600,500));
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setUndecorated(true);
 		window.setLocation(200, 200);
-		//window.setOpacity(0.8f);
+		window.setOpacity(0.8f);
 		window.getContentPane().setLayout(null);
 		
 		try {
@@ -45,7 +45,7 @@ public class Snake {
 		window.setIconImage(Resource.Icon);
 		
 		sg=new StartGame();
-		sg.setBounds(0,0,700,450);
+		sg.setBounds(0,0,600,500);
 		window.getContentPane().add(sg);
 		new Thread(sg).start();
 		
@@ -61,22 +61,24 @@ public class Snake {
 				}
 				if (e.getKeyCode()==KeyEvent.VK_RIGHT)
 				{
-					if (board.direction!="left")
+					if (board.oldDirection.equals("left")==false)
 						board.direction="right";
 				}
 				if (e.getKeyCode()==KeyEvent.VK_LEFT)
 				{
-					if (board.direction!="right")
+					if (board.oldDirection.equals("right")==false)
 						board.direction="left";
 				}
 				if (e.getKeyCode()==KeyEvent.VK_UP)
 				{
-					if (board.direction!="down")
+					
+					if (board.oldDirection.equals("down")==false)
 						board.direction="up";
 				}
 				if (e.getKeyCode()==KeyEvent.VK_DOWN)
 				{
-					if (board.direction!="up")
+					
+					if (board.oldDirection.equals("up")==false)
 						board.direction="down";
 				}
 				if (e.getKeyCode()==KeyEvent.VK_SPACE)
@@ -86,7 +88,7 @@ public class Snake {
 						state="process";
 						window.getContentPane().remove(sg);
 						board=new Board();
-						board.setBounds(0,0,700,450);
+						board.setBounds(0,0,600,500);
 						window.getContentPane().add(board);
 					} else if (board.gameOver==true)
 					{
