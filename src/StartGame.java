@@ -87,6 +87,29 @@ public class StartGame extends JPanel implements Runnable{
 				e.printStackTrace();
 			}
 		}
+		buffer="press p to pause";
+		for (int i=0;i<=buffer.length();i++)
+		{
+			String sub=buffer.substring(0, i);
+			g2d.setColor(new Color(20,20,20));
+			g2d.fillRect(0, 0, 600, 500);
+			g2d.setColor(new Color(0,180,0));
+			g2d.setFont(new Font("Courier New",1,20));
+			g2d.drawString(sub, 150, 300);
+			g2d.setFont(new Font("Courier New",1,40));
+			g2d.drawString("Snake", 140, 150);
+			g2d.setFont(new Font("Courier New",1,20));
+			g2d.drawString("press space to start the game", 150, 200);
+			g2d.setFont(new Font("Courier New",1,20));
+			g2d.drawString("press esc to exit the game", 150, 250);
+			repaint();
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	public void paintComponent(Graphics g)
 	{
