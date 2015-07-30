@@ -1,5 +1,5 @@
 # snake
-jswing 贪吃蛇游戏
+jswing The Greedy Snake?
 
 double buffer
 
