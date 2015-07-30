@@ -137,10 +137,12 @@ public class Board extends JPanel implements Runnable{
 			{
 				if (t.x<0||t.x>19||t.y<0||t.y>14)
 				{
+					Snake.state="gameover";
 					gameOver=true;
 					return;
 				} else if (block[t.x][t.y].frame==2)
 				{
+					Snake.state="gameover";
 					gameOver=true;
 					return;
 				}

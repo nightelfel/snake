@@ -16,6 +16,7 @@ public class StartGame extends JPanel implements Runnable{
 	private BufferedImage img;
 	private Graphics2D g2d;
 	private String buffer;
+	private int timeInterval;
 	public StartGame()
 	{
 		img=new BufferedImage(600,500,BufferedImage.TYPE_INT_ARGB);
@@ -26,6 +27,7 @@ public class StartGame extends JPanel implements Runnable{
 	}
 	public void initial()
 	{
+		timeInterval=50;
 		new Thread(this).start();
 	}
 	public void run()
@@ -40,44 +42,62 @@ public class StartGame extends JPanel implements Runnable{
 			g2d.drawString(buffer.substring(0,i), 110, 140);
 			repaint();
 			try {
-				Thread.sleep(100);
+				Thread.sleep(timeInterval);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		try {
+			Thread.sleep(10*timeInterval);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		g2d.setFont(new Font("Courier New",1,20));
 		buffer="press space to start the game";
 		for (int i=0;i<=buffer.length();i++)
 		{
-			g2d.drawString(buffer.substring(0,i),120,200);
+			g2d.drawString(buffer.substring(0,i),60,200);
 			repaint();
 			try {
-				Thread.sleep(100);
+				Thread.sleep(timeInterval);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		try {
+			Thread.sleep(10*timeInterval);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		buffer="space is also used to pause/unpause the game";
+		for (int i=0;i<=buffer.length();i++)
+		{
+			g2d.drawString(buffer.substring(0,i),60,250);
+			repaint();
+			try {
+				Thread.sleep(timeInterval);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		try {
+			Thread.sleep(10*timeInterval);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		buffer="press esc to exit the game";
 		for (int i=0;i<=buffer.length();i++)
 		{
-			g2d.drawString(buffer.substring(0,i),120,250);
+			g2d.drawString(buffer.substring(0,i),60,300);
 			repaint();
 			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		buffer="press p to pause";
-		for (int i=0;i<=buffer.length();i++)
-		{
-			g2d.drawString(buffer.substring(0,i),120,300);
-			repaint();
-			try {
-				Thread.sleep(100);
+				Thread.sleep(timeInterval);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -14,7 +14,7 @@ public class Snake {
 	private JFrame window;
 	private Board board;
 	private StartGame sg;
-	private String state;
+	public static String state;
 	private String temp;
 	public Snake()
 	{
@@ -94,12 +94,9 @@ public class Snake {
 						window.getContentPane().add(board);
 					} else if (board.gameOver==true)
 					{
+						state="process";
 						new Thread(board).start();
-					}
-				}
-				if (e.getKeyCode()==KeyEvent.VK_P)
-				{
-					if (state=="process")
+					} else if (state=="process")
 					{
 						state="pause";
 							temp=board.direction;
