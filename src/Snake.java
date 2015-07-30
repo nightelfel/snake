@@ -23,7 +23,7 @@ public class Snake {
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setUndecorated(true);
 		window.setLocation(200, 200);
-		window.setOpacity(0.8f);
+		window.setOpacity(0.9f);
 		window.getContentPane().setLayout(null);
 		
 		try {

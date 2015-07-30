@@ -52,7 +52,6 @@ public class Board extends JPanel implements Runnable{
 	}
 	public void initial()
 	{
-	
 		try {
 			clip=AudioSystem.getClip();
 			clip.open(AudioSystem.getAudioInputStream(getClass().getResource("/dint.wav")));
@@ -72,6 +71,7 @@ public class Board extends JPanel implements Runnable{
 		g2d.setColor(new Color(0,180,0));
 		g2d.drawString("score",20,30);
 		g2d.drawString(Integer.toString(score), 100, 30);
+		g2d.drawString("made by nightelfel", 300, 30);
 		for (int i=0;i<20;i++)
 		{
 			for (int j=0;j<15;j++)
@@ -143,6 +143,10 @@ public class Board extends JPanel implements Runnable{
 		list.add(t);
 		if (block[t.x][t.y].frame==3)
 		{
+			if (clip.isRunning())
+			{
+				clip.stop();
+			}
 			clip.setFramePosition(0);
 			clip.start();
 			hasfood=false;
@@ -153,6 +157,7 @@ public class Board extends JPanel implements Runnable{
 			g2d.setColor(new Color(0,180,0));
 			g2d.drawString("score",20,30);
 			g2d.drawString(Integer.toString(score), 100, 30);
+			g2d.drawString("made by nightelfel", 300, 30);
 		} else
 		{
 			c=list.poll();
