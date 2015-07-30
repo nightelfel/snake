@@ -47,7 +47,6 @@ public class Snake {
 		sg=new StartGame();
 		sg.setBounds(0,0,600,500);
 		window.getContentPane().add(sg);
-		new Thread(sg).start();
 		
 		window.pack();
 		window.setVisible(true);

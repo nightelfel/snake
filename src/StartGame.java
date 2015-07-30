@@ -15,7 +15,7 @@ public class StartGame extends JPanel implements Runnable{
 	private static final long serialVersionUID = 1L;
 	private BufferedImage img;
 	private Graphics2D g2d;
-	private int opaque;
+	private String buffer;
 	public StartGame()
 	{
 		img=new BufferedImage(600,500,BufferedImage.TYPE_INT_ARGB);
@@ -26,15 +26,38 @@ public class StartGame extends JPanel implements Runnable{
 	}
 	public void initial()
 	{
-		opaque=255;
+		new Thread(this).start();
 	}
 	public void run()
 	{
-		for (int i=opaque;i>=0;i-=10)
+		g2d.setFont(new Font("Courier New",1,40));
+		buffer="Snake";
+		for (int i=0;i<=buffer.length();i++)
 		{
-			g2d.drawImage(Resource.jiemian, 0, 0, 600,500,this);
-			g2d.setColor(new Color(20,20,20,i));
+			String sub=buffer.substring(0, i);
+			g2d.setColor(new Color(20,20,20));
 			g2d.fillRect(0, 0, 600, 500);
+			g2d.setColor(new Color(0,180,0));
+			g2d.drawString(sub, 140, 150);
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			repaint();
+		}
+		buffer="press space to start the game";
+		for (int i=0;i<=buffer.length();i++)
+		{
+			String sub=buffer.substring(0, i);
+			g2d.setColor(new Color(20,20,20));
+			g2d.fillRect(0, 0, 600, 500);
+			g2d.setColor(new Color(0,180,0));
+			g2d.setFont(new Font("Courier New",1,20));
+			g2d.drawString(sub, 150, 200);
+			g2d.setFont(new Font("Courier New",1,40));
+			g2d.drawString("Snake", 140, 150);
 			repaint();
 			try {
 				Thread.sleep(100);
@@ -43,11 +66,27 @@ public class StartGame extends JPanel implements Runnable{
 				e.printStackTrace();
 			}
 		}
-		g2d.setFont(new Font("Courier New",1,20));
-		g2d.setColor(new Color(0,180,0));
-		g2d.drawString("press space to start the game", 150, 250);
-		g2d.drawString("press esc to exit", 200, 300);
-		repaint();
+		buffer="press esc to exit the game";
+		for (int i=0;i<=buffer.length();i++)
+		{
+			String sub=buffer.substring(0, i);
+			g2d.setColor(new Color(20,20,20));
+			g2d.fillRect(0, 0, 600, 500);
+			g2d.setColor(new Color(0,180,0));
+			g2d.setFont(new Font("Courier New",1,20));
+			g2d.drawString(sub, 150, 250);
+			g2d.setFont(new Font("Courier New",1,40));
+			g2d.drawString("Snake", 140, 150);
+			g2d.setFont(new Font("Courier New",1,20));
+			g2d.drawString("press space to start the game", 150, 200);
+			repaint();
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	public void paintComponent(Graphics g)
 	{
