@@ -15,6 +15,7 @@ public class Snake {
 	private Board board;
 	private StartGame sg;
 	private String state;
+	private String temp;
 	public Snake()
 	{
 		state="welcome";
@@ -60,25 +61,27 @@ public class Snake {
 				}
 				if (e.getKeyCode()==KeyEvent.VK_RIGHT)
 				{
-					if (board.oldDirection.equals("left")==false)
-						board.direction="right";
+					if (state=="process")
+						if (board.oldDirection.equals("left")==false)
+							board.direction="right";
 				}
 				if (e.getKeyCode()==KeyEvent.VK_LEFT)
 				{
-					if (board.oldDirection.equals("right")==false)
-						board.direction="left";
+					if (state=="process")
+						if (board.oldDirection.equals("right")==false)
+							board.direction="left";
 				}
 				if (e.getKeyCode()==KeyEvent.VK_UP)
 				{
-					
-					if (board.oldDirection.equals("down")==false)
-						board.direction="up";
+					if (state=="process")
+						if (board.oldDirection.equals("down")==false)
+							board.direction="up";
 				}
 				if (e.getKeyCode()==KeyEvent.VK_DOWN)
 				{
-					
-					if (board.oldDirection.equals("up")==false)
-						board.direction="down";
+					if (state=="process")
+						if (board.oldDirection.equals("up")==false)
+							board.direction="down";
 				}
 				if (e.getKeyCode()==KeyEvent.VK_SPACE)
 				{
@@ -92,6 +95,19 @@ public class Snake {
 					} else if (board.gameOver==true)
 					{
 						new Thread(board).start();
+					}
+				}
+				if (e.getKeyCode()==KeyEvent.VK_P)
+				{
+					if (state=="process")
+					{
+						state="pause";
+							temp=board.direction;
+							board.direction="null";
+					} else if (state=="pause")
+					{
+							state="process";
+							board.direction=temp;
 					}
 				}
 			}

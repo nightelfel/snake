@@ -31,33 +31,26 @@ public class StartGame extends JPanel implements Runnable{
 	public void run()
 	{
 		g2d.setFont(new Font("Courier New",1,40));
+		g2d.setColor(new Color(40,40,40));
+		g2d.fillRect(0, 0, 600, 500);
+		
 		buffer="Snake";
-		for (int i=0;i<=buffer.length();i++)
-		{
-			String sub=buffer.substring(0, i);
-			g2d.setColor(new Color(20,20,20));
-			g2d.fillRect(0, 0, 600, 500);
-			g2d.setColor(new Color(0,180,0));
-			g2d.drawString(sub, 140, 150);
+		g2d.setColor(new Color(0,180,0));
+		for (int i=0;i<=buffer.length();i++){
+			g2d.drawString(buffer.substring(0,i), 110, 140);
+			repaint();
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			repaint();
 		}
+		g2d.setFont(new Font("Courier New",1,20));
 		buffer="press space to start the game";
 		for (int i=0;i<=buffer.length();i++)
 		{
-			String sub=buffer.substring(0, i);
-			g2d.setColor(new Color(20,20,20));
-			g2d.fillRect(0, 0, 600, 500);
-			g2d.setColor(new Color(0,180,0));
-			g2d.setFont(new Font("Courier New",1,20));
-			g2d.drawString(sub, 150, 200);
-			g2d.setFont(new Font("Courier New",1,40));
-			g2d.drawString("Snake", 140, 150);
+			g2d.drawString(buffer.substring(0,i),120,200);
 			repaint();
 			try {
 				Thread.sleep(100);
@@ -69,16 +62,7 @@ public class StartGame extends JPanel implements Runnable{
 		buffer="press esc to exit the game";
 		for (int i=0;i<=buffer.length();i++)
 		{
-			String sub=buffer.substring(0, i);
-			g2d.setColor(new Color(20,20,20));
-			g2d.fillRect(0, 0, 600, 500);
-			g2d.setColor(new Color(0,180,0));
-			g2d.setFont(new Font("Courier New",1,20));
-			g2d.drawString(sub, 150, 250);
-			g2d.setFont(new Font("Courier New",1,40));
-			g2d.drawString("Snake", 140, 150);
-			g2d.setFont(new Font("Courier New",1,20));
-			g2d.drawString("press space to start the game", 150, 200);
+			g2d.drawString(buffer.substring(0,i),120,250);
 			repaint();
 			try {
 				Thread.sleep(100);
@@ -90,18 +74,7 @@ public class StartGame extends JPanel implements Runnable{
 		buffer="press p to pause";
 		for (int i=0;i<=buffer.length();i++)
 		{
-			String sub=buffer.substring(0, i);
-			g2d.setColor(new Color(20,20,20));
-			g2d.fillRect(0, 0, 600, 500);
-			g2d.setColor(new Color(0,180,0));
-			g2d.setFont(new Font("Courier New",1,20));
-			g2d.drawString(sub, 150, 300);
-			g2d.setFont(new Font("Courier New",1,40));
-			g2d.drawString("Snake", 140, 150);
-			g2d.setFont(new Font("Courier New",1,20));
-			g2d.drawString("press space to start the game", 150, 200);
-			g2d.setFont(new Font("Courier New",1,20));
-			g2d.drawString("press esc to exit the game", 150, 250);
+			g2d.drawString(buffer.substring(0,i),120,300);
 			repaint();
 			try {
 				Thread.sleep(100);

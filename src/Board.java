@@ -108,64 +108,73 @@ public class Board extends JPanel implements Runnable{
 	}
 	public void move()
 	{
-		if (hasfood==false)
+		if (direction.equals("null")==false)
 		{
-			generateFood();
-			hasfood=true;
-		}
-		Point t=null;
-		Point c=list.getLast();
-		if (direction=="right")
-		{
-			t=new Point(c.x+1,c.y);
-		}
-		if (direction=="left")
-		{
-			t=new Point(c.x-1,c.y);
-		}
-		if (direction=="up")
-		{
-			t=new Point(c.x,c.y-1);
-		}
-		if (direction=="down")
-		{
-			t=new Point(c.x,c.y+1);
-		}
-		if (t.x<0||t.x>19||t.y<0||t.y>14)
-		{
-			gameOver=true;
-			return;
-		} else if (block[t.x][t.y].frame==2)
-		{
-			gameOver=true;
-			return;
-		}
-		list.add(t);
-		if (block[t.x][t.y].frame==3)
-		{
-			if (clip.isRunning())
+			if (hasfood==false)
 			{
-				clip.stop();
+				generateFood();
+				hasfood=true;
 			}
-			clip.setFramePosition(0);
-			clip.start();
-			hasfood=false;
-			score+=10;
-			g2d.setColor(new Color(0,0,0));
-			g2d.setFont(new Font("Courier New",1,20));
-			g2d.fillRect(0, 0, 600, 50);
-			g2d.setColor(new Color(0,180,0));
-			g2d.drawString("score",20,30);
-			g2d.drawString(Integer.toString(score), 100, 30);
-			g2d.drawString("made by nightelfel", 300, 30);
+			Point t=null;
+			Point c=list.getLast();
+			if (direction=="right")
+			{
+				t=new Point(c.x+1,c.y);
+			}
+			if (direction=="left")
+			{
+				t=new Point(c.x-1,c.y);
+			}
+			if (direction=="up")
+			{
+				t=new Point(c.x,c.y-1);
+			}
+			if (direction=="down")
+			{
+				t=new Point(c.x,c.y+1);
+			}
+			if (t!=null)
+			{
+				if (t.x<0||t.x>19||t.y<0||t.y>14)
+				{
+					gameOver=true;
+					return;
+				} else if (block[t.x][t.y].frame==2)
+				{
+					gameOver=true;
+					return;
+				}
+				list.add(t);
+				if (block[t.x][t.y].frame==3)
+				{
+					if (clip.isRunning())
+					{
+						clip.stop();
+					}
+					clip.setFramePosition(0);
+					clip.start();
+					hasfood=false;
+					score+=10;
+					g2d.setColor(new Color(0,0,0));
+					g2d.setFont(new Font("Courier New",1,20));
+					g2d.fillRect(0, 0, 600, 50);
+					g2d.setColor(new Color(0,180,0));
+					g2d.drawString("score",20,30);
+					g2d.drawString(Integer.toString(score), 100, 30);
+					g2d.drawString("made by nightelfel", 300, 30);
+				} else
+				{
+					c=list.poll();
+					block[c.x][c.y].gotoAndStop(1);
+				}
+				block[t.x][t.y].gotoAndStop(2);
+				repaint();
+			}
+			oldDirection=new String(direction);
 		} else
 		{
-			c=list.poll();
-			block[c.x][c.y].gotoAndStop(1);
+			return;
 		}
-		block[t.x][t.y].gotoAndStop(2);
-		repaint();
-		oldDirection=new String(direction);
 	}
 	public void run()
 	{
