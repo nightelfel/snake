@@ -1,3 +1,4 @@
+package Snake;
 import java.util.Random;
 
 
