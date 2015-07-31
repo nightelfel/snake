@@ -5,9 +5,8 @@ import java.io.IOException;
 import javax.swing.JFrame;
 
 
-public class Snake {
-	public static Animation am;
-	public Snake()
+public class Main {
+	public Main()
 	{
 		try {
 			Resource.load(this);
@@ -26,9 +25,9 @@ public class Snake {
 		window.getContentPane().setLayout(null);
 		window.setIconImage(Resource.Icon);
 		
-		am=new Animation();
-		am.setBounds(0,0,Resource.width,Resource.height);
-		window.getContentPane().add(am);
+		Resource.am=new Animation();
+		Resource.am.setBounds(0,0,Resource.width,Resource.height);
+		window.getContentPane().add(Resource.am);
 		
 		new StateControl(window).startGame();
 		
@@ -37,6 +36,6 @@ public class Snake {
 	}
 	public static void main(String[] args)
 	{
-		new Snake();
+		new Main();
 	}
 }

@@ -25,7 +25,7 @@ public class Board implements Runnable{
 	private Animation render;
 	public Board()
 	{
-		render=Snake.am;
+		render=Resource.am;
 		clip=Resource.ding;
 		rand=new Random();
 		list=new LinkedList<Point>();

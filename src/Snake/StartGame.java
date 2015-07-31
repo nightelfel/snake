@@ -15,7 +15,7 @@ public class StartGame implements Runnable{
 	private Animation render;
 	public StartGame()
 	{
-		render=Snake.am;
+		render=Resource.am;
 		img=new BufferedImage(Resource.width,Resource.height,BufferedImage.TYPE_INT_ARGB);
 		g2d=(Graphics2D) img.getGraphics();
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);

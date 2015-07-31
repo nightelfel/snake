@@ -21,7 +21,7 @@ public class Resource {
 	public static Color snakeColor;
 	public static int timeInterval;
 	public static Clip ding;
-	
+	public static Animation am;
 	
 	
 	public static BufferedImage img;
@@ -30,7 +30,7 @@ public class Resource {
 	
 	public static Lock lock;
 	
-	public static void load(Snake snake) throws IOException
+	public static void load(Main o) throws IOException
 	{	
 		lock=new ReentrantLock();
 		timeInterval=200;
@@ -39,12 +39,12 @@ public class Resource {
 		row=20;
 		colum=15;
 		snakeColor=new Color(0,180,0);
-		Icon=ImageIO.read(snake.getClass().getResourceAsStream("/snake.png"));
-		block=ImageIO.read(snake.getClass().getResourceAsStream("/block.png"));
-		food=ImageIO.read(snake.getClass().getResourceAsStream("/food.png"));
+		Icon=ImageIO.read(o.getClass().getResourceAsStream("/snake.png"));
+		block=ImageIO.read(o.getClass().getResourceAsStream("/block.png"));
+		food=ImageIO.read(o.getClass().getResourceAsStream("/food.png"));
 		try {
 			ding=AudioSystem.getClip();
-			ding.open(AudioSystem.getAudioInputStream(snake.getClass().getResource("/dint.wav")));
+			ding.open(AudioSystem.getAudioInputStream(o.getClass().getResource("/dint.wav")));
 		} catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -52,7 +52,7 @@ public class Resource {
 		
 		try {
 			Clip clip=AudioSystem.getClip();
-			clip.open(AudioSystem.getAudioInputStream(snake.getClass().getResource("/music.wav")));
+			clip.open(AudioSystem.getAudioInputStream(o.getClass().getResource("/music.wav")));
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
 		} catch (LineUnavailableException | IOException | UnsupportedAudioFileException e2) {
 			// TODO Auto-generated catch block
