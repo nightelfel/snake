@@ -23,7 +23,7 @@ public class StartGame implements Runnable{
 	public void initial()
 	{
 		render.setStage(img);
-		timeInterval=Resource.timeInterval/2;
+		timeInterval=Resource.timeInterval/4;
 		new Thread(this).start();
 	}
 	public void run()
