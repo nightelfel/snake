@@ -5,14 +5,10 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Random;
 
-import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JPanel;
 
 
@@ -25,50 +21,40 @@ public class Board extends JPanel implements Runnable{
 	private Graphics2D g2d;
 	private BufferedImage img;
 	private LinkedList<Point> list;
-	public String direction;
-	public String oldDirection;
-	public boolean gameOver;
+	private String direction;
 	public boolean hasfood;
 	private Random rand;
 	private int score;
 	private Clip clip;
+	
 	public Board()
 	{
+		clip=Resource.ding;
 		rand=new Random();
 		list=new LinkedList<Point>();
-		img=new BufferedImage(600,500,BufferedImage.TYPE_INT_ARGB);
+		img=new BufferedImage(Resource.width,Resource.height,BufferedImage.TYPE_INT_ARGB);
 		g2d=(Graphics2D) img.getGraphics();
 		block=new Block[20][15];
-		g2d.setBackground(new Color(0,0,0));
+		g2d.setBackground(Color.black);
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		for (int i=0;i<20;i++)
+		for (int i=0;i<Resource.row;i++)
 		{
-			for (int j=0;j<15;j++)
+			for (int j=0;j<Resource.colum;j++)
 			{
 				block[i][j]=new Block(i,j,g2d);
 			}
 		}
-		new Thread(this).start();
 	}
 	public void initial()
 	{
-		try {
-			clip=AudioSystem.getClip();
-			clip.open(AudioSystem.getAudioInputStream(getClass().getResource("/dint.wav")));
-		} catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		score=0;
 		hasfood=false;
-		gameOver=false;
 		direction="right";
-		oldDirection="right";
 		list.removeAll(list);
-		g2d.setColor(new Color(0,0,0));
+		g2d.setColor(Color.black);
 		g2d.setFont(new Font("Courier New",1,20));
 		g2d.fillRect(0, 0, 600, 50);
-		g2d.setColor(new Color(0,180,0));
+		g2d.setColor(Resource.snakeColor);
 		g2d.drawString("score",20,30);
 		g2d.drawString(Integer.toString(score), 100, 30);
 		g2d.drawString("made by nightelfel", 300, 30);
@@ -89,6 +75,7 @@ public class Board extends JPanel implements Runnable{
 			block[temp.x][temp.y].gotoAndStop(2);
 		}
 		repaint();
+		new Thread(this).start();
 	}
 	public void generateFood()
 	{
@@ -97,8 +84,8 @@ public class Board extends JPanel implements Runnable{
 		int y=0;
 		while (taken)
 		{
-			x=rand.nextInt(20);
-			y=rand.nextInt(15);
+			x=rand.nextInt(Resource.row);
+			y=rand.nextInt(Resource.colum);
 			if (block[x][y].frame==1)
 			{
 				taken=false;
@@ -108,6 +95,16 @@ public class Board extends JPanel implements Runnable{
 	}
 	public void move()
 	{
+		if (StateControl.command=="right"&&direction!="left")
+			direction="right";
+		if (StateControl.command=="down"&&direction!="up")
+			direction="down";
+		if (StateControl.command=="left"&&direction!="right")
+			direction="left";
+		if (StateControl.command=="up"&&direction!="down")
+			direction="up";
+		if (StateControl.command=="null")
+			direction="null";
 		if (direction.equals("null")==false)
 		{
 			if (hasfood==false)
@@ -135,15 +132,13 @@ public class Board extends JPanel implements Runnable{
 			}
 			if (t!=null)
 			{
-				if (t.x<0||t.x>19||t.y<0||t.y>14)
+				if (t.x<0||t.x>(Resource.row-1)||t.y<0||t.y>(Resource.colum-1))
 				{
-					Snake.state="gameover";
-					gameOver=true;
+					StateControl.state="gameover";
 					return;
 				} else if (block[t.x][t.y].frame==2)
 				{
-					Snake.state="gameover";
-					gameOver=true;
+					StateControl.state="gameover";
 					return;
 				}
 				list.add(t);
@@ -157,10 +152,10 @@ public class Board extends JPanel implements Runnable{
 					clip.start();
 					hasfood=false;
 					score+=10;
-					g2d.setColor(new Color(0,0,0));
+					g2d.setColor(Color.black);
 					g2d.setFont(new Font("Courier New",1,20));
 					g2d.fillRect(0, 0, 600, 50);
-					g2d.setColor(new Color(0,180,0));
+					g2d.setColor(Resource.snakeColor);
 					g2d.drawString("score",20,30);
 					g2d.drawString(Integer.toString(score), 100, 30);
 					g2d.drawString("made by nightelfel", 300, 30);
@@ -172,7 +167,6 @@ public class Board extends JPanel implements Runnable{
 				block[t.x][t.y].gotoAndStop(2);
 				repaint();
 			}
-			oldDirection=new String(direction);
 		} else
 		{
 			return;
@@ -180,23 +174,22 @@ public class Board extends JPanel implements Runnable{
 	}
 	public void run()
 	{
-		initial();
 		while (true)
 		{
 			move();
-			if (gameOver==true)
+			if (StateControl.state.equals("gameover")==true)
 			{
 				break;
 			}
 			try {
-				Thread.sleep(100);
+				Thread.sleep(Resource.timeInterval);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		g2d.setColor(new Color(40,40,40,180));
-		g2d.fillRect(0, 0, 600, 500);
+		g2d.fillRect(0, 0, Resource.width, Resource.height);
 		g2d.setColor(new Color(0,180,0));
 		g2d.drawString("your score is "+score, 100, 200);
 		g2d.drawString("press space to play again", 100, 250);
@@ -204,6 +197,6 @@ public class Board extends JPanel implements Runnable{
 	}
 	public void paintComponent(Graphics g)
 	{
-		g.drawImage(img, 0, 0, 600,500,this);
+		g.drawImage(img, 0, 0, Resource.width,Resource.height,this);
 	}
 }

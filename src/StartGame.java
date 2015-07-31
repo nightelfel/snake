@@ -19,7 +19,7 @@ public class StartGame extends JPanel implements Runnable{
 	private int timeInterval;
 	public StartGame()
 	{
-		img=new BufferedImage(600,500,BufferedImage.TYPE_INT_ARGB);
+		img=new BufferedImage(Resource.width,Resource.height,BufferedImage.TYPE_INT_ARGB);
 		g2d=(Graphics2D) img.getGraphics();
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		initial();
@@ -27,17 +27,17 @@ public class StartGame extends JPanel implements Runnable{
 	}
 	public void initial()
 	{
-		timeInterval=50;
+		timeInterval=Resource.timeInterval/2;
 		new Thread(this).start();
 	}
 	public void run()
 	{
 		g2d.setFont(new Font("Courier New",1,40));
 		g2d.setColor(new Color(40,40,40));
-		g2d.fillRect(0, 0, 600, 500);
+		g2d.fillRect(0, 0, Resource.width, Resource.height);
 		
 		buffer="Snake";
-		g2d.setColor(new Color(0,180,0));
+		g2d.setColor(Resource.snakeColor);
 		for (int i=0;i<=buffer.length();i++){
 			g2d.drawString(buffer.substring(0,i), 110, 140);
 			repaint();
@@ -106,6 +106,6 @@ public class StartGame extends JPanel implements Runnable{
 	}
 	public void paintComponent(Graphics g)
 	{
-		g.drawImage(img, 0, 0, 600, 500, this);
+		g.drawImage(img, 0, 0, Resource.width, Resource.height, this);
 	}
 }
