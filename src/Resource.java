@@ -25,6 +25,7 @@ public class Resource {
 	
 	public static BufferedImage img;
 	public static BufferedImage block;
+	public static BufferedImage food;
 	
 	public static Lock lock;
 	
@@ -39,6 +40,7 @@ public class Resource {
 		snakeColor=new Color(0,180,0);
 		Icon=ImageIO.read(snake.getClass().getResourceAsStream("/snake.png"));
 		block=ImageIO.read(snake.getClass().getResourceAsStream("/block.png"));
+		food=ImageIO.read(snake.getClass().getResourceAsStream("/food.png"));
 		try {
 			ding=AudioSystem.getClip();
 			ding.open(AudioSystem.getAudioInputStream(snake.getClass().getResource("/dint.wav")));

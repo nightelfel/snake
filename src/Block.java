@@ -34,6 +34,7 @@ public class Block {
 			g2d.setColor(new Color(205,85,85));
 			g2d.clearRect(x, y, length, length);
 			g2d.fillRoundRect(x+1, y+1, length-2, length-2, 10, 10);
+			g2d.drawImage(Resource.food, x+1,y+1,length-2, length-2, Snake.am);
 		} else if (a==4) //block
 		{
 			g2d.clearRect(x,y,length,length);
