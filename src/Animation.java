@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
 
-public class Animation extends JPanel {
+public class Animation extends JPanel{
 	/**
 	 * 
 	 */

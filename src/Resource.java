@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioSystem;
@@ -19,8 +21,11 @@ public class Resource {
 	public static int timeInterval;
 	public static Clip ding;
 	public static BufferedImage img;
+	public static Lock lock;
+	
 	public static void load(Snake snake) throws IOException
 	{	
+		lock=new ReentrantLock();
 		timeInterval=100;
 		width=600;
 		height=500;

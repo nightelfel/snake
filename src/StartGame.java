@@ -36,14 +36,15 @@ public class StartGame implements Runnable{
 		g2d.setColor(Resource.snakeColor);
 		for (int i=0;i<=buffer.length();i++){
 			g2d.drawString(buffer.substring(0,i), 110, 140);
-			if (StateControl.state=="welcome")
-				render.repaint();
+			
 			try {
 				Thread.sleep(timeInterval);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			if (StateControl.state=="welcome")
+				render.repaint();
 		}
 		try {
 			Thread.sleep(10*timeInterval);
@@ -56,14 +57,15 @@ public class StartGame implements Runnable{
 		for (int i=0;i<=buffer.length();i++)
 		{
 			g2d.drawString(buffer.substring(0,i),60,200);
-			if (StateControl.state=="welcome")
-				render.repaint();
+			
 			try {
 				Thread.sleep(timeInterval);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			if (StateControl.state=="welcome")
+				render.repaint();
 		}
 		try {
 			Thread.sleep(10*timeInterval);
@@ -75,14 +77,15 @@ public class StartGame implements Runnable{
 		for (int i=0;i<=buffer.length();i++)
 		{
 			g2d.drawString(buffer.substring(0,i),60,250);
-			if (StateControl.state=="welcome")
-				render.repaint();
+			
 			try {
 				Thread.sleep(timeInterval);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			if (StateControl.state=="welcome")
+				render.repaint();
 		}
 		try {
 			Thread.sleep(10*timeInterval);
@@ -94,14 +97,15 @@ public class StartGame implements Runnable{
 		for (int i=0;i<=buffer.length();i++)
 		{
 			g2d.drawString(buffer.substring(0,i),60,300);
-			if (StateControl.state=="welcome")
-				render.repaint();
+			
 			try {
 				Thread.sleep(timeInterval);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			if (StateControl.state=="welcome")
+				render.repaint();
 		}
 	}
 }

@@ -22,7 +22,6 @@ public class Board implements Runnable{
 	private int score;
 	private Clip clip;
 	private Animation render;
-	
 	public Board()
 	{
 		render=Snake.am;
@@ -72,7 +71,6 @@ public class Board implements Runnable{
 			temp=list.get(i);
 			block[temp.x][temp.y].gotoAndStop(2);
 		}
-		render.repaint();
 		new Thread(this).start();
 	}
 	public void generateFood()
@@ -152,7 +150,7 @@ public class Board implements Runnable{
 					score+=10;
 					g2d.setColor(Color.black);
 					g2d.setFont(new Font("Courier New",1,20));
-					g2d.fillRect(0, 0, 600, 50);
+					g2d.clearRect(0, 0, 600, 50);
 					g2d.setColor(Resource.snakeColor);
 					g2d.drawString("score",20,30);
 					g2d.drawString(Integer.toString(score), 100, 30);
@@ -163,7 +161,6 @@ public class Board implements Runnable{
 					block[c.x][c.y].gotoAndStop(1);
 				}
 				block[t.x][t.y].gotoAndStop(2);
-				render.repaint();
 			}
 		} else
 		{
@@ -175,6 +172,7 @@ public class Board implements Runnable{
 		while (true)
 		{
 			move();
+			render.repaint();
 			if (StateControl.state.equals("gameover")==true)
 			{
 				break;
