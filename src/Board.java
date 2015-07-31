@@ -1,6 +1,5 @@
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
@@ -9,14 +8,10 @@ import java.util.LinkedList;
 import java.util.Random;
 
 import javax.sound.sampled.Clip;
-import javax.swing.JPanel;
 
 
-public class Board extends JPanel implements Runnable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class Board implements Runnable{
+
 	private Block[][] block;
 	private Graphics2D g2d;
 	private BufferedImage img;
@@ -26,9 +21,11 @@ public class Board extends JPanel implements Runnable{
 	private Random rand;
 	private int score;
 	private Clip clip;
+	private Animation render;
 	
 	public Board()
 	{
+		render=Snake.am;
 		clip=Resource.ding;
 		rand=new Random();
 		list=new LinkedList<Point>();
@@ -47,6 +44,7 @@ public class Board extends JPanel implements Runnable{
 	}
 	public void initial()
 	{
+		render.setStage(img);
 		score=0;
 		hasfood=false;
 		direction="right";
@@ -74,7 +72,7 @@ public class Board extends JPanel implements Runnable{
 			temp=list.get(i);
 			block[temp.x][temp.y].gotoAndStop(2);
 		}
-		repaint();
+		render.repaint();
 		new Thread(this).start();
 	}
 	public void generateFood()
@@ -165,7 +163,7 @@ public class Board extends JPanel implements Runnable{
 					block[c.x][c.y].gotoAndStop(1);
 				}
 				block[t.x][t.y].gotoAndStop(2);
-				repaint();
+				render.repaint();
 			}
 		} else
 		{
@@ -193,10 +191,6 @@ public class Board extends JPanel implements Runnable{
 		g2d.setColor(new Color(0,180,0));
 		g2d.drawString("your score is "+score, 100, 200);
 		g2d.drawString("press space to play again", 100, 250);
-		this.repaint();
-	}
-	public void paintComponent(Graphics g)
-	{
-		g.drawImage(img, 0, 0, Resource.width,Resource.height,this);
+		render.repaint();
 	}
 }

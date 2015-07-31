@@ -1,32 +1,28 @@
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 
-import javax.swing.JPanel;
 
+public class StartGame implements Runnable{
 
-public class StartGame extends JPanel implements Runnable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private BufferedImage img;
 	private Graphics2D g2d;
 	private String buffer;
 	private int timeInterval;
+	private Animation render;
 	public StartGame()
 	{
+		render=Snake.am;
 		img=new BufferedImage(Resource.width,Resource.height,BufferedImage.TYPE_INT_ARGB);
 		g2d=(Graphics2D) img.getGraphics();
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		initial();
-		this.setLayout(null);
 	}
 	public void initial()
 	{
+		render.setStage(img);
 		timeInterval=Resource.timeInterval/2;
 		new Thread(this).start();
 	}
@@ -40,7 +36,8 @@ public class StartGame extends JPanel implements Runnable{
 		g2d.setColor(Resource.snakeColor);
 		for (int i=0;i<=buffer.length();i++){
 			g2d.drawString(buffer.substring(0,i), 110, 140);
-			repaint();
+			if (StateControl.state=="welcome")
+				render.repaint();
 			try {
 				Thread.sleep(timeInterval);
 			} catch (InterruptedException e) {
@@ -59,7 +56,8 @@ public class StartGame extends JPanel implements Runnable{
 		for (int i=0;i<=buffer.length();i++)
 		{
 			g2d.drawString(buffer.substring(0,i),60,200);
-			repaint();
+			if (StateControl.state=="welcome")
+				render.repaint();
 			try {
 				Thread.sleep(timeInterval);
 			} catch (InterruptedException e) {
@@ -77,7 +75,8 @@ public class StartGame extends JPanel implements Runnable{
 		for (int i=0;i<=buffer.length();i++)
 		{
 			g2d.drawString(buffer.substring(0,i),60,250);
-			repaint();
+			if (StateControl.state=="welcome")
+				render.repaint();
 			try {
 				Thread.sleep(timeInterval);
 			} catch (InterruptedException e) {
@@ -95,7 +94,8 @@ public class StartGame extends JPanel implements Runnable{
 		for (int i=0;i<=buffer.length();i++)
 		{
 			g2d.drawString(buffer.substring(0,i),60,300);
-			repaint();
+			if (StateControl.state=="welcome")
+				render.repaint();
 			try {
 				Thread.sleep(timeInterval);
 			} catch (InterruptedException e) {
@@ -103,9 +103,5 @@ public class StartGame extends JPanel implements Runnable{
 				e.printStackTrace();
 			}
 		}
-	}
-	public void paintComponent(Graphics g)
-	{
-		g.drawImage(img, 0, 0, Resource.width, Resource.height, this);
 	}
 }

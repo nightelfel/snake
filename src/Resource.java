@@ -18,6 +18,7 @@ public class Resource {
 	public static Color snakeColor;
 	public static int timeInterval;
 	public static Clip ding;
+	public static BufferedImage img;
 	public static void load(Snake snake) throws IOException
 	{	
 		timeInterval=100;
@@ -45,4 +46,5 @@ public class Resource {
 			e2.printStackTrace();
 		}
 	}
+	
 }

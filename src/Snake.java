@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 
 
 public class Snake {
-
+	public static Animation am;
 	public Snake()
 	{
 		try {
@@ -24,6 +24,10 @@ public class Snake {
 		window.setOpacity(0.9f);
 		window.getContentPane().setLayout(null);
 		window.setIconImage(Resource.Icon);
+		
+		am=new Animation();
+		am.setBounds(0,0,Resource.width,Resource.height);
+		window.getContentPane().add(am);
 		
 		new StateControl(window).startGame();
 		

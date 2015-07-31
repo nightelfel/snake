@@ -82,9 +82,7 @@ public class StateControl {
 		state="welcome";
 		window.addKeyListener(keySystem);
 		window.addKeyListener(keyStart);
-		StartGame sg=new StartGame();
-		sg.setBounds(0,0,600,500);
-		window.getContentPane().add(sg);
+		new StartGame();
 	}
 	
 	public void processGame()
@@ -92,11 +90,8 @@ public class StateControl {
 		state="process";
 		oldcommand="right";
 		command="right";
-		window.getContentPane().removeAll();
-		window.getContentPane().repaint();
+		
 		Board board=new Board();
-		board.setBounds(0,0,600,500);
 		board.initial();
-		window.getContentPane().add(board);
 	}
 }
