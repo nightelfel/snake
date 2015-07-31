@@ -28,7 +28,7 @@ public class StartGame implements Runnable{
 	}
 	public void run()
 	{
-		g2d.setFont(new Font("Courier New",1,40));
+		g2d.setFont(new Font("Courier New",0,40));
 		g2d.setColor(new Color(40,40,40));
 		g2d.fillRect(0, 0, Resource.width, Resource.height);
 		
@@ -52,7 +52,7 @@ public class StartGame implements Runnable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		g2d.setFont(new Font("Courier New",1,20));
+		g2d.setFont(new Font("Courier New",0,20));
 		buffer="press space to start the game";
 		for (int i=0;i<=buffer.length();i++)
 		{

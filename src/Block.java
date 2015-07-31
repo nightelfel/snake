@@ -19,17 +19,25 @@ public class Block {
 	public void gotoAndStop(int a)
 	{
 		frame=a;
-		if (a==1)
+		if (a==1)//original
 		{
-			g2d.setColor(new Color(60,60,60));
-		} else if (a==2)
+			g2d.setColor(new Color(60,60,60)); 
+			g2d.clearRect(x, y, length, length);
+			g2d.fillRoundRect(x+1, y+1, length-2, length-2, 10, 10);
+		} else if (a==2)//snake
 		{
-			g2d.setColor(new Color(0,139,69));
-		} else if (a==3)
+			g2d.setColor(Resource.snakeColor);
+			g2d.clearRect(x, y, length, length);
+			g2d.fillRoundRect(x+1, y+1, length-2, length-2, 10, 10);
+		} else if (a==3)//food
 		{
 			g2d.setColor(new Color(205,85,85));
+			g2d.clearRect(x, y, length, length);
+			g2d.fillRoundRect(x+1, y+1, length-2, length-2, 10, 10);
+		} else if (a==4) //block
+		{
+			g2d.clearRect(x,y,length,length);
+			g2d.drawImage(Resource.block,x+1,y+1,length-2,length-2,Snake.am);
 		}
-		g2d.clearRect(x, y, length, length);
-		g2d.fillRoundRect(x+1, y+1, length-2, length-2, 10, 10);
 	}
 }

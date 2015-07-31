@@ -20,20 +20,25 @@ public class Resource {
 	public static Color snakeColor;
 	public static int timeInterval;
 	public static Clip ding;
+	
+	
+	
 	public static BufferedImage img;
+	public static BufferedImage block;
+	
 	public static Lock lock;
 	
 	public static void load(Snake snake) throws IOException
 	{	
 		lock=new ReentrantLock();
-		timeInterval=100;
+		timeInterval=200;
 		width=600;
 		height=500;
 		row=20;
 		colum=15;
 		snakeColor=new Color(0,180,0);
 		Icon=ImageIO.read(snake.getClass().getResourceAsStream("/snake.png"));
-		
+		block=ImageIO.read(snake.getClass().getResourceAsStream("/block.png"));
 		try {
 			ding=AudioSystem.getClip();
 			ding.open(AudioSystem.getAudioInputStream(snake.getClass().getResource("/dint.wav")));

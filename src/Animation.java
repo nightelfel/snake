@@ -16,6 +16,13 @@ public class Animation extends JPanel{
 	}
 	public void paintComponent(Graphics g)
 	{
-		g.drawImage(img,0,0,Resource.width,Resource.height,this);
+		Resource.lock.lock();
+		try
+		{
+			g.drawImage(img,0,0,Resource.width,Resource.height,this);
+		} finally
+		{
+			Resource.lock.unlock();
+		}
 	}
 }

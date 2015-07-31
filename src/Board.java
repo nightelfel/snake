@@ -17,7 +17,7 @@ public class Board implements Runnable{
 	private BufferedImage img;
 	private LinkedList<Point> list;
 	private String direction;
-	public boolean hasfood;
+	//public boolean hasfood;
 	private Random rand;
 	private int score;
 	private Clip clip;
@@ -45,7 +45,7 @@ public class Board implements Runnable{
 	{
 		render.setStage(img);
 		score=0;
-		hasfood=false;
+		
 		direction="right";
 		list.removeAll(list);
 		g2d.setColor(Color.black);
@@ -71,6 +71,7 @@ public class Board implements Runnable{
 			temp=list.get(i);
 			block[temp.x][temp.y].gotoAndStop(2);
 		}
+		new FoodBlock(block).initial();
 		new Thread(this).start();
 	}
 	public void generateFood()
@@ -103,11 +104,11 @@ public class Board implements Runnable{
 			direction="null";
 		if (direction.equals("null")==false)
 		{
-			if (hasfood==false)
+			/*if (hasfood==false)
 			{
 				generateFood();
 				hasfood=true;
-			}
+			}*/
 			Point t=null;
 			Point c=list.getLast();
 			if (direction=="right")
@@ -132,7 +133,7 @@ public class Board implements Runnable{
 				{
 					StateControl.state="gameover";
 					return;
-				} else if (block[t.x][t.y].frame==2)
+				} else if (block[t.x][t.y].frame==2||block[t.x][t.y].frame==4)
 				{
 					StateControl.state="gameover";
 					return;
@@ -146,7 +147,7 @@ public class Board implements Runnable{
 					}
 					clip.setFramePosition(0);
 					clip.start();
-					hasfood=false;
+					//hasfood=false;
 					score+=10;
 					g2d.setColor(Color.black);
 					g2d.setFont(new Font("Courier New",1,20));
