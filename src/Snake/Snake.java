@@ -51,6 +51,11 @@ public class Snake implements Runnable{
 					list.addFirst(body);
 					foodx=-1;
 					foody=-1;
+					if (score==100)
+					{
+						StateControl.state="gamewin";
+							return;
+					}
 				}
 			}
 			for (int i=0;i<list.size();i++)
@@ -105,11 +110,6 @@ public class Snake implements Runnable{
 				block[foodx][foody].gotoAndStop(2);
 			} 
 			if (StateControl.state=="gameover")
-				return;
-		}
-		if (score==100)
-		{
-			StateControl.state="gamewin";
 				return;
 		}
 		frame++;
@@ -224,9 +224,18 @@ public class Snake implements Runnable{
 	}
 	public void run()
 	{
+		refresh();
+		render.repaint();
+		try {
+			Thread.sleep(Resource.timeInterval);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		while (true)
 		{
-			move();
+			if (StateControl.state=="process")
+				move();
 			refresh();
 			render.repaint();
 			if (StateControl.state=="gameover"||StateControl.state=="gamewin")

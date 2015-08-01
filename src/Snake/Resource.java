@@ -41,7 +41,7 @@ public class Resource {
 		//integer
 		lock=new ReentrantLock();
 		length=30;
-		timeInterval=200;
+		timeInterval=160;
 		width=600;
 		height=500;
 		row=20;

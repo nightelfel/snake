@@ -13,7 +13,7 @@ public class StateControl {
 	private KeyAdapter keyProcess;
 	public static String command;
 	public static String oldcommand;
-	private String temp;
+	
 	public StateControl(JFrame w)
 	{
 		window=w;
@@ -66,13 +66,12 @@ public class StateControl {
 					if (state.equals("gameover")==true||state.equals("gamewin")==true)
 					{
 						processGame();
-					} else if (command.equals("null")==false)
+					} else if (state=="pause")
 					{
-							temp=command;
-							command="null";
+							state="process";
 					} else
 					{
-							command=temp;
+							state="pause";
 					}
 				}
 			}
