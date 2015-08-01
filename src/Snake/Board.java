@@ -10,7 +10,7 @@ import java.util.Random;
 
 
 public class Board{
-//fuck you
+
 	private Block[][] block;
 	private Graphics2D g2d;
 	private BufferedImage img;
