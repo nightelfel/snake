@@ -42,6 +42,12 @@ public class Snake implements Runnable{
 	{
 		if (frame==0)
 		{
+			try {
+				Thread.sleep(2*Resource.timeInterval);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			if (getFood==true)
 			{
 				if (foodx!=-1&&foody!=-1)
