@@ -8,25 +8,21 @@ import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import java.util.Random;
 
-import javax.sound.sampled.Clip;
 
-
-public class Board implements Runnable{
+public class Board{
 
 	private Block[][] block;
 	private Graphics2D g2d;
 	private BufferedImage img;
 	private LinkedList<Point> list;
-	private String direction;
-	//public boolean hasfood;
 	private Random rand;
 	private int score;
-	private Clip clip;
+	//private Clip clip;
 	private Animation render;
 	public Board()
 	{
 		render=Resource.am;
-		clip=Resource.ding;
+		//clip=Resource.ding;
 		rand=new Random();
 		list=new LinkedList<Point>();
 		img=new BufferedImage(Resource.width,Resource.height,BufferedImage.TYPE_INT_ARGB);
@@ -46,8 +42,6 @@ public class Board implements Runnable{
 	{
 		render.setStage(img);
 		score=0;
-		
-		direction="right";
 		list.removeAll(list);
 		g2d.setColor(Color.black);
 		g2d.setFont(new Font("Courier New",1,20));
@@ -63,17 +57,9 @@ public class Board implements Runnable{
 				block[i][j].gotoAndStop(1);
 			}
 		}
-		list.add(new Point(0,0));
-		list.add(new Point(1,0));
-		list.add(new Point(2,0));
-		for (int i=0;i<list.size();i++)
-		{
-			Point temp;
-			temp=list.get(i);
-			block[temp.x][temp.y].gotoAndStop(2);
-		}
 		new FoodBlock(block).initial();
-		new Thread(this).start();
+		render.repaint();
+		new Thread(new Snake(g2d,block)).start();
 	}
 	public void generateFood()
 	{
@@ -91,7 +77,7 @@ public class Board implements Runnable{
 		}
 		block[x][y].gotoAndStop(3);
 	}
-	public void move()
+	/*public void move()
 	{
 		if (StateControl.command=="right"&&direction!="left")
 			direction="right";
@@ -105,11 +91,7 @@ public class Board implements Runnable{
 			direction="null";
 		if (direction.equals("null")==false)
 		{
-			/*if (hasfood==false)
-			{
-				generateFood();
-				hasfood=true;
-			}*/
+		
 			Point t=null;
 			Point c=list.getLast();
 			if (direction=="right")
@@ -168,8 +150,8 @@ public class Board implements Runnable{
 		{
 			return;
 		}
-	}
-	public void run()
+	}*/
+	/*public void run()
 	{
 		while (true)
 		{
@@ -192,5 +174,5 @@ public class Board implements Runnable{
 		g2d.drawString("your score is "+score, 100, 200);
 		g2d.drawString("press space to play again", 100, 250);
 		render.repaint();
-	}
+	}*/
 }

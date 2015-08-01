@@ -45,7 +45,7 @@ public class FoodBlock {
 		{
 			x=rand.nextInt(Resource.row);
 			y=rand.nextInt(Resource.colum);
-			if (block[x][y].frame==1)
+			if (block[x][y].frame==1&&(x!=3&&y!=0))
 			{
 				taken=false;
 				break;

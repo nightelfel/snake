@@ -63,7 +63,7 @@ public class StateControl {
 				}
 				if (e.getKeyCode()==KeyEvent.VK_SPACE)
 				{
-					if (state.equals("gameover")==true)
+					if (state.equals("gameover")==true||state.equals("gamewin")==true)
 					{
 						processGame();
 					} else if (command.equals("null")==false)

@@ -13,35 +13,53 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 
 public class Resource {
-	public static BufferedImage Icon;
 	public static int width;
 	public static int height;
 	public static int row;
 	public static int colum;
-	public static Color snakeColor;
 	public static int timeInterval;
-	public static Clip ding;
-	public static Animation am;
+	public static int length;
+	public static int lengthBar;
+	public static int arc;
 	
 	
 	public static BufferedImage img;
 	public static BufferedImage block;
 	public static BufferedImage food;
+	public static BufferedImage head;
 	
 	public static Lock lock;
 	
+	public static Clip ding;
+	public static Animation am;
+	public static Color snakeColor;
+	public static BufferedImage Icon;
+	
+	
 	public static void load(Main o) throws IOException
 	{	
+		//integer
 		lock=new ReentrantLock();
+		length=30;
 		timeInterval=200;
 		width=600;
 		height=500;
 		row=20;
 		colum=15;
+		lengthBar=50;
+		arc=10;
+		
+		//color
 		snakeColor=new Color(0,180,0);
+		
+		
+		//image
 		Icon=ImageIO.read(o.getClass().getResourceAsStream("/snake.png"));
 		block=ImageIO.read(o.getClass().getResourceAsStream("/block.png"));
 		food=ImageIO.read(o.getClass().getResourceAsStream("/food.png"));
+		head=ImageIO.read(o.getClass().getResourceAsStream("/head.png"));
+		
+		//sound
 		try {
 			ding=AudioSystem.getClip();
 			ding.open(AudioSystem.getAudioInputStream(o.getClass().getResource("/dint.wav")));
